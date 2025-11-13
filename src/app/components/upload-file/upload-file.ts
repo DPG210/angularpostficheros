@@ -4,17 +4,21 @@ import { ServicePostFiles } from '../../service/service.ficheros';
 
 import { FileModel } from '../../models/fileModel'; 
 
+import { FormsModule } from '@angular/forms';
+
 @Component({ 
 
 selector: 'app-testingfiles', 
 
-templateUrl: './testingfiles.component.html', 
+templateUrl: './upload-file.html', 
 
-styleUrl: './testingfiles.component.css' 
+styleUrl: './upload-file.css' ,
+
+imports:[FormsModule]
 
 }) 
 
-export class TestingfilesComponent implements OnInit { 
+export class UploadFile implements OnInit { 
 
  @ViewChild("cajafile") cajaFileRef!: ElementRef; 
 
