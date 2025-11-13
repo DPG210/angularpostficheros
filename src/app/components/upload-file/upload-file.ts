@@ -1,100 +1,100 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'; 
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
-import { ServicePostFiles } from '../../service/service.ficheros'; 
+import { ServicePostFiles } from '../../service/service.ficheros';
 
-import { FileModel } from '../../models/fileModel'; 
+import { FileModel } from '../../models/fileModel';
 
 import { FormsModule } from '@angular/forms';
 
-@Component({ 
+@Component({
 
-selector: 'app-testingfiles', 
+    selector: 'app-testingfiles',
 
-templateUrl: './upload-file.html', 
+    templateUrl: './upload-file.html',
 
-styleUrl: './upload-file.css' ,
+    styleUrl: './upload-file.css',
 
-imports:[FormsModule]
+    imports: [FormsModule]
 
-}) 
+})
 
-export class UploadFile implements OnInit { 
+export class UploadFile implements OnInit {
 
- @ViewChild("cajafile") cajaFileRef!: ElementRef; 
+    @ViewChild("cajafile") cajaFileRef!: ElementRef;
 
- public fileContent: string; 
+    public fileContent: string;
 
- public urlFileUpload!: string; 
+    public urlFileUpload!: string;
 
- constructor(private _service: ServicePostFiles) { 
- this.fileContent = ""; 
+    constructor(private _service: ServicePostFiles) {
+        this.fileContent = "";
 
- } 
+    }
 
- ngOnInit(): void { 
+    ngOnInit(): void {
 
- } 
+    }
 
- subirFichero(): void{ 
+    subirFichero(): void {
 
- //ESTE ES EL FICHERO QUE DEBEMOS LEER 
+        //ESTE ES EL FICHERO QUE DEBEMOS LEER 
 
- var file = this.cajaFileRef.nativeElement.files[0]; 
+        var file = this.cajaFileRef.nativeElement.files[0];
 
- //ELIMINAMOS LAS BARRAS QUE INCLUYE EL TIPO FILE EN EL NAME 
+        //ELIMINAMOS LAS BARRAS QUE INCLUYE EL TIPO FILE EN EL NAME 
 
- //YA QUE VIENE LA RUTA Y NECESITAMOS EL NOMBRE DEL FICHERO 
+        //YA QUE VIENE LA RUTA Y NECESITAMOS EL NOMBRE DEL FICHERO 
 
- var miPath = this.cajaFileRef.nativeElement.value.split("\\"); 
+        var miPath = this.cajaFileRef.nativeElement.value.split("\\");
 
- //NOS QUEDAMOS CON EL ULTIMO VALOR, QUE ES EL NOMBRE DEL FILE 
+        //NOS QUEDAMOS CON EL ULTIMO VALOR, QUE ES EL NOMBRE DEL FILE 
 
- var ficheroNombre = miPath[2]; 
+        var ficheroNombre = miPath[2];
 
- console.log(ficheroNombre); 
+        console.log(ficheroNombre);
 
- //CREAMOS UN LECTOR PARA LEER EL FICHERO 
+        //CREAMOS UN LECTOR PARA LEER EL FICHERO 
 
- var reader = new FileReader(); 
+        var reader = new FileReader();
 
- reader.readAsArrayBuffer(file); 
+        reader.readAsArrayBuffer(file);
 
- reader.onloadend = () => { 
+        reader.onloadend = () => {
 
-let buffer: ArrayBuffer; 
+            let buffer: ArrayBuffer;
 
- buffer = reader.result as ArrayBuffer; 
+            buffer = reader.result as ArrayBuffer;
 
- var base64: string; 
+            var base64: string;
 
-//LA FUNCION btoa CONVIERTE BYTES A BASE64 
+            //LA FUNCION btoa CONVIERTE BYTES A BASE64 
 
- base64 = btoa( 
+            base64 = btoa(
 
- new Uint8Array(buffer) 
+                new Uint8Array(buffer)
 
- .reduce((data, byte) => data + String.fromCharCode(byte), '') 
+                    .reduce((data, byte) => data + String.fromCharCode(byte), '')
 
-); 
+            );
 
- 
 
- this.fileContent = base64; 
 
-var newFileModel =  
+            this.fileContent = base64;
 
- new FileModel(ficheroNombre, base64); 
+            var newFileModel =
 
- this._service.postFile(newFileModel).subscribe(response => { 
+                new FileModel(ficheroNombre, base64);
 
- console.log(response); 
+            this._service.postFile(newFileModel).subscribe(response => {
 
- this.urlFileUpload = response.urlFile; 
+                console.log(response);
 
- }) 
+                this.urlFileUpload = response.urlFile;
 
- }; 
+            })
 
- } 
+        };
+
+    }
 
 } 
