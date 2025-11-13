@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 
 import { Observable } from "rxjs"; 
 
-import { fileModel } from "../models/fileModel";
+import { FileModel } from "../models/fileModel";
 
 @Injectable() 
 
@@ -13,7 +13,7 @@ export class ServicePostFiles {
  constructor(private _http: HttpClient) {} 
 
  //VOY A RECIBIR DIRECTAMENTE EL OBJETO EN EL METODO DE INSERTAR 
-postFile(fileModel: fileModel): Observable<any>{ 
+postFile(fileModel: FileModel): Observable<any>{ 
  let json = JSON.stringify(fileModel); 
  //DEBEMOS INDICAR EN LA PETICION QUE TIPO DE FORMATO TIENE EL OBJETO A ENVIAR 
 let header = new HttpHeaders(); 

@@ -1,4 +1,4 @@
-export class fileModel{
+export class FileModel{
     constructor(
         public fileName:string,
         public fileContent:string

@@ -2,7 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChang
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ServiceFichero } from './service/service.ficheros';
+import { ServicePostFiles } from './service/service.ficheros';
 
 import { routes } from './app.routes';
 
@@ -13,6 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     FormsModule,
-    ServiceFichero
+    ServicePostFiles
   ]
 };

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'; 
 
-import { ServicePostFiles } from '../../services/service.postfiles'; 
+import { ServicePostFiles } from '../../service/service.ficheros'; 
 
 import { FileModel } from '../../models/fileModel'; 
 
